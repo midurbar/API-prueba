@@ -6,7 +6,7 @@ const {Poblacion} = require('./models')
 app.get("/", function (req, res) {
     res.json("hola");
 })
-
+//Corregido
 app.get("/poblaciones", function (req, res) {
     Poblacion.findAll()
     .then(poblaciones => res.json(poblaciones))
