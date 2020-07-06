@@ -8,7 +8,7 @@ app.get("/", function (req, res) {
 })
 
 app.get("/poblaciones", function (req, res) {
-    Poblacion.findall()
+    Poblacion.findAll()
     .then(poblaciones => res.json(poblaciones))
     .catch(err => res.json(err))
 })
