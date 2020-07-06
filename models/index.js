@@ -1,7 +1,7 @@
 const sequelize= require('./db');
 const Poblacion= require('./poblaciones.js');
 
-
+//Comentario porque si
 sequelize
   .authenticate()
   .then(() => {
