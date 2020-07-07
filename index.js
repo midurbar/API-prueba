@@ -14,4 +14,11 @@ app.get("/poblaciones", function (req, res) {
     .catch(err => res.json(err))
 })
 
+app.get("/poblaciones/:id", function (req, res) {
+    const {id} = req.params;
+    Poblacion.findOne({where: {id}})
+    .then(poblaciones => res.json(poblaciones))
+    .catch(err => res.json(err))
+})
+
 app.listen(3000)
