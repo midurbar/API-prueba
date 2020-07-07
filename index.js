@@ -64,6 +64,7 @@ app.delete("/poblaciones/:id", function (req, res) {
             res.status(404).json("Poblacion no registrada")
         }
     })
+    .catch(err => res.status(400).json(err))
 })
 
 app.listen(3000)
