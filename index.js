@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const {Poblacion} = require('./models')
-
+app.use(express.json())
 
 app.get("/", function (req, res) {
     res.json("hola");
@@ -25,11 +25,25 @@ app.get("/poblaciones/:id", function (req, res) {
 })
 
 app.post("/poblaciones", function (req, res) {
-    const poblacion = JSON.parse(req.body);
+    const poblacion = req.body;
     Poblacion.create(poblacion)
     .then(poblacion => res.status(201).json(poblacion))
-    .catch(err => res.json(err))
+    .catch(err => res.status(400).json(err))
 })
 
+app.put("/poblaciones/:id", function (req, res) {
+    const {id} = req.params;
+    const nuevosDatos = req.body;
+    Poblacion.findOne({where: {id}})
+    .then(poblacion => {
+        //copia los campos de nuevosDatos al objeto original
+        Object.assign(poblacion, nuevosDatos);
+
+        //Guarda los datos actualizados y genera respuesta
+        poblacion.save()
+        .then(poblacion => res.json(poblacion))
+    })
+    .catch(err => res.status(400).json(err))
+})
 
 app.listen(3000)
