@@ -24,4 +24,12 @@ app.get("/poblaciones/:id", function (req, res) {
     .catch(err => res.json(err))
 })
 
+app.post("/poblaciones", function (req, res) {
+    const poblacion = JSON.parse(req.body);
+    Poblacion.create(poblacion)
+    .then(poblacion => res.status(201).json(poblacion))
+    .catch(err => res.json(err))
+})
+
+
 app.listen(3000)
